@@ -53,7 +53,7 @@ public class VoucherTest {
 
     @Test
     void testSetNameIfNameIsEmpty() {
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             voucher.setVoucherName("");
         });
     }
@@ -72,14 +72,14 @@ public class VoucherTest {
 
     @Test
     void testSetDiscountIfDiscountAboveOneHundredPercent() {
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             voucher.setVoucherDiscount(1.01);
         });
     }
 
     @Test
     void testSetDiscountIfDiscountBelowZeroPercent() {
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             voucher.setVoucherDiscount(-0.01);
         });
     }
