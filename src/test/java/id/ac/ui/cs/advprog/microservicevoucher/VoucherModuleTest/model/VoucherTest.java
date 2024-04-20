@@ -16,7 +16,7 @@ public class VoucherTest {
                 "Voucher Name",
                 "Voucher desc",
                 0.5,
-                -1
+                1
         );
     }
 
@@ -42,6 +42,71 @@ public class VoucherTest {
 
     @Test
     void testGetVoucherQuota() {
-        assertEquals(-1, this.voucher.getVoucherQuota());
+        assertEquals(1, this.voucher.getVoucherQuota());
+    }
+
+    @Test
+    void testSetNameIfNameIsNotEmpty() {
+        voucher.setVoucherName("Diskon Lebaran");
+        assertEquals("Diskon Lebaran", voucher.getVoucherName());
+    }
+
+    @Test
+    void testSetNameIfNameIsEmpty() {
+        assertThrows(IllegalAccessError.class, () -> {
+            voucher.setVoucherName("");
+        });
+    }
+
+    @Test
+    void testSetDesc() {
+        voucher.setVoucherDesc("");
+        assertEquals("", voucher.getVoucherDesc());
+    }
+
+    @Test
+    void testSetDiscountIfDiscountBetweenZeroAndOneHundredPercent() {
+        voucher.setVoucherDiscount(0.001);
+        assertEquals(0.001, voucher.getVoucherDiscount());
+    }
+
+    @Test
+    void testSetDiscountIfDiscountAboveOneHundredPercent() {
+        assertThrows(IllegalAccessError.class, () -> {
+            voucher.setVoucherDiscount(1.01);
+        });
+    }
+
+    @Test
+    void testSetDiscountIfDiscountBelowZeroPercent() {
+        assertThrows(IllegalAccessError.class, () -> {
+            voucher.setVoucherDiscount(-0.01);
+        });
+    }
+
+    @Test
+    void testSetQuotaIfQuotaIsMinusOne() {
+        voucher.setVoucherQuota(-1);
+        assertEquals(-1, voucher.getVoucherQuota());
+    }
+
+    @Test
+    void testSetQuotaIfQuotaIsMoreThanOne() {
+        voucher.setVoucherQuota(5);
+        assertEquals(5, voucher.getVoucherQuota());
+    }
+
+    @Test
+    void testSetQuotaIfQuotaIsZero() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            voucher.setVoucherQuota(0);
+        });
+    }
+
+    @Test
+    void testSetQuotaIfQuotaBelowMinusOne() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            voucher.setVoucherQuota(-3);
+        });
     }
 }
