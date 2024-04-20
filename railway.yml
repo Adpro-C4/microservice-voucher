@@ -1,0 +1,7 @@
+name: microservice-voucher
+
+services:
+  web:
+    builder:
+      name: NIXPACKS
+    buildScript: ./railwaybuild.sh
