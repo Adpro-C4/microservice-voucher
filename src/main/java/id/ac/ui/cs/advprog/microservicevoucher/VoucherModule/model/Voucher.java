@@ -5,10 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Builder
-@Getter @Setter
+@Getter
 public class Voucher {
     private Long voucherId;
     private String voucherName;
+    @Setter
     private String voucherDesc;
     private Double voucherDiscount;
     private Integer voucherQuota;
@@ -19,5 +20,14 @@ public class Voucher {
         this.voucherDesc = voucherDesc;
         this.voucherDiscount = voucherDiscount;
         this.voucherQuota = voucherQuota;
+    }
+
+    public void setVoucherName(String newVoucherName) {
+    }
+
+    public void setVoucherDiscount(double newVoucherDiscount) {
+    }
+
+    public void setVoucherQuota(int newVoucherQuota) {
     }
 }
