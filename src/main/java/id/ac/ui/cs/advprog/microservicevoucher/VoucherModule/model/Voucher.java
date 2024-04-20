@@ -14,5 +14,10 @@ public class Voucher {
     private Integer voucherQuota;
 
     public Voucher(Long voucherId, String voucherName, String voucherDesc, Double voucherDiscount, Integer voucherQuota) {
+        this.voucherId = voucherId;
+        this.voucherName = voucherName;
+        this.voucherDesc = voucherDesc;
+        this.voucherDiscount = voucherDiscount;
+        this.voucherQuota = voucherQuota;
     }
 }
