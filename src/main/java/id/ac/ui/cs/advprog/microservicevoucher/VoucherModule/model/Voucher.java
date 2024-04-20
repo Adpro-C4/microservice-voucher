@@ -23,11 +23,23 @@ public class Voucher {
     }
 
     public void setVoucherName(String newVoucherName) {
+        if (newVoucherName.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        this.voucherName = newVoucherName;
     }
 
     public void setVoucherDiscount(double newVoucherDiscount) {
+        if (newVoucherDiscount > 1.0 || newVoucherDiscount < 0.0) {
+            throw new IllegalArgumentException();
+        }
+        this.voucherDiscount = newVoucherDiscount;
     }
 
     public void setVoucherQuota(int newVoucherQuota) {
+        if (newVoucherQuota == 0 || newVoucherQuota < -1) {
+            throw new IllegalArgumentException();
+        }
+        this.voucherQuota = newVoucherQuota;
     }
 }
