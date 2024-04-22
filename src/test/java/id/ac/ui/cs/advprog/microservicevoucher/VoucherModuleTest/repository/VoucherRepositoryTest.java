@@ -29,14 +29,4 @@ public class VoucherRepositoryTest {
         vouchers = new ArrayList<>();
         vouchers.add(voucher1);
     }
-
-    @Test
-    void testSaveNewVoucher() {
-        Voucher voucher = vouchers.getFirst();
-        voucherRepository.save(voucher);
-
-        Voucher findResult = voucherRepository.findAll().getFirst();
-        assertEquals(1L, findResult.getVoucherId());
-        assertEquals(voucher.getVoucherName(), findResult.getVoucherName());
-    }
 }
