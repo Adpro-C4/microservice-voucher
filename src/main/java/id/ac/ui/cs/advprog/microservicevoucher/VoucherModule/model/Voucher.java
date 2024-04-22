@@ -25,13 +25,14 @@ public class Voucher {
     @Column(name = "voucher_quota", nullable = false)
     private Integer voucherQuota;
 
-    public Voucher(Long voucherId, String voucherName, String voucherDesc, Double voucherDiscount, Integer voucherQuota) {
-        this.voucherId = voucherId;
+    public Voucher(String voucherName, String voucherDesc, Double voucherDiscount, Integer voucherQuota) {
         setVoucherName(voucherName);
         this.voucherDesc = voucherDesc;
         setVoucherDiscount(voucherDiscount);
         setVoucherQuota(voucherQuota);
     }
+
+    public Voucher() {}
 
     public void setVoucherName(String newVoucherName) {
         if (newVoucherName.isBlank()) {

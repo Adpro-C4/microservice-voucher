@@ -12,7 +12,6 @@ public class VoucherTest {
     @BeforeEach
     void setUp() {
         voucher = new Voucher(
-                0L,
                 "Voucher Name",
                 "Voucher desc",
                 0.5,
