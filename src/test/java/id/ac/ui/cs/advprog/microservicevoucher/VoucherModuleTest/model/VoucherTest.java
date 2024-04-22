@@ -13,7 +13,7 @@ public class VoucherTest {
     void setUp() {
         voucher = new Voucher(
                 "Voucher Name",
-                "Voucher desc",
+                "Voucher description",
                 0.5,
                 1
         );
@@ -30,8 +30,8 @@ public class VoucherTest {
     }
 
     @Test
-    void testGetVoucherDesc() {
-        assertEquals("Voucher desc", this.voucher.getVoucherDesc());
+    void testGetVoucherDescription() {
+        assertEquals("Voucher description", this.voucher.getVoucherDescription());
     }
 
     @Test
@@ -58,9 +58,9 @@ public class VoucherTest {
     }
 
     @Test
-    void testSetDesc() {
-        voucher.setVoucherDesc("");
-        assertEquals("", voucher.getVoucherDesc());
+    void testSetDescription() {
+        voucher.setVoucherDescription("");
+        assertEquals("", voucher.getVoucherDescription());
     }
 
     @Test

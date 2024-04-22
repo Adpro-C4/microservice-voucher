@@ -17,7 +17,7 @@ public class Voucher {
 
     @Setter
     @Column(name = "voucher_desc")
-    private String voucherDesc;
+    private String voucherDescription;
 
     @Column(name = "voucher_discount", nullable = false)
     private Double voucherDiscount;
@@ -25,9 +25,9 @@ public class Voucher {
     @Column(name = "voucher_quota", nullable = false)
     private Integer voucherQuota;
 
-    public Voucher(String voucherName, String voucherDesc, Double voucherDiscount, Integer voucherQuota) {
+    public Voucher(String voucherName, String voucherDescription, Double voucherDiscount, Integer voucherQuota) {
         setVoucherName(voucherName);
-        this.voucherDesc = voucherDesc;
+        this.voucherDescription = voucherDescription;
         setVoucherDiscount(voucherDiscount);
         setVoucherQuota(voucherQuota);
     }

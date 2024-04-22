@@ -6,10 +6,11 @@ import java.util.List;
 
 public interface VoucherService {
     public Voucher save(Voucher voucher);
-    public Voucher delete(Voucher voucher);
+    public void deleteById(Long id);
     public List<Voucher> findAll();
     public Voucher findVoucherById(Long id);
     public List<Voucher> findAllVoucherByName(String name);
     public List<Voucher> findAllVoucherByDiscount(Double discount);
     public List<Voucher> findAllVoucherByUsageQuota(Integer quota);
+
 }
