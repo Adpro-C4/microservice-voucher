@@ -41,7 +41,7 @@ tasks.withType<Test> {
 tasks.test {
 	filter {
 		excludeTestsMatching("*FunctionalTest");
-		excludeTestsMatching("*ApplicationTests")
+//		excludeTestsMatching("*ApplicationTests")
 	}
 	finalizedBy(tasks.jacocoTestReport)
 }
