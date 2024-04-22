@@ -21,7 +21,7 @@ public class VoucherTest {
 
     @Test
     void testGetVoucherId() {
-        assertEquals(0L, this.voucher.getVoucherId());
+        assertNull(this.voucher.getVoucherId());
     }
 
     @Test
