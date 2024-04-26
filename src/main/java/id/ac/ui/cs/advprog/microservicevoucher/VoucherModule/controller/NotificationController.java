@@ -12,4 +12,14 @@ import java.util.List;
 public class NotificationController {
     @Autowired
     private NotificationService service;
+
+    @PostMapping("/accept-notification")
+    public DTOCustomer acceptNotification(@RequestBody DTOCustomer customer) {
+        return service.acceptNotification(customer);
+    }
+
+    @PostMapping("/create")
+    public DTOCustomer createVoucher(@RequestBody DTOCustomer customer) {
+        return service.rejectNotification(customer);
+    }
 }
