@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.service;
 
+import enums.NotificationStatus;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.Voucher;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.repository.VoucherRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,10 +15,13 @@ import java.util.List;
 public class VoucherServiceImpl implements VoucherService{
     @Autowired
     VoucherRepository voucherRepository;
+    @Autowired
+    NotificationService notificationService;
 
     @Override
     public Voucher save(Voucher voucher) {
         voucherRepository.save(voucher);
+        notificationService.notify(NotificationStatus.CREATED.getValue(), voucher);
         return voucher;
     }
 
