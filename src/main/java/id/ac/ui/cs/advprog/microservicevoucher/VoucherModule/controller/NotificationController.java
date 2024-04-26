@@ -18,8 +18,8 @@ public class NotificationController {
         return service.acceptNotification(customer);
     }
 
-    @PostMapping("/create")
-    public DTOCustomer createVoucher(@RequestBody DTOCustomer customer) {
+    @PostMapping("/reject-notification")
+    public DTOCustomer rejectNotification(@RequestBody DTOCustomer customer) {
         return service.rejectNotification(customer);
     }
 }
