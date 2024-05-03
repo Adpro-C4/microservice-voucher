@@ -21,7 +21,7 @@ public class VoucherServiceImpl implements VoucherService{
     @Override
     public Voucher save(Voucher voucher) {
         voucherRepository.save(voucher);
-        notificationService.notify(NotificationStatus.CREATED.getValue(), voucher);
+        notificationService.notify(NotificationStatus.CREATED, voucher);
         return voucher;
     }
 

@@ -1,12 +1,16 @@
 package id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.service;
 
+import enums.NotificationStatus;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.Notification;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.Voucher;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.dto.DTOCustomer;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.repository.dto.DTOCustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class NotificationServiceImpl implements NotificationService{
 //    private final RestTemplate restTemplate;
 //
@@ -28,7 +32,7 @@ public class NotificationServiceImpl implements NotificationService{
     }
 
     @Override
-    public void notify(String status, Voucher voucher) {
+    public void notify(NotificationStatus status, Voucher voucher) {
         Notification payload = new Notification(
                 voucher.getVoucherName(),
                 voucher.getVoucherDiscount(),
