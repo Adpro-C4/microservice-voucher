@@ -12,11 +12,7 @@ import java.util.List;
 
 @Service
 public class NotificationServiceImpl implements NotificationService{
-//    private final RestTemplate restTemplate;
-//
-//    public NotificationServiceImpl(RestTemplate restTemplate) {
-//        this.restTemplate = restTemplate;
-//    }
+    @Autowired
     DTOCustomerRepository customerRepository;
 
     @Override
