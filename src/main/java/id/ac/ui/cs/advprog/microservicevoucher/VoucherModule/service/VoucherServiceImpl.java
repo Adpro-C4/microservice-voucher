@@ -21,7 +21,7 @@ public class VoucherServiceImpl implements VoucherService{
     @Override
     public Voucher save(Voucher voucher) {
         voucherRepository.save(voucher);
-        notificationService.notify(NotificationStatus.CREATED, voucher);
+        notificationService.notify(NotificationStatus.CREATED.getValue(), voucher);
         return voucher;
     }
 
@@ -42,53 +42,17 @@ public class VoucherServiceImpl implements VoucherService{
 
     @Override
     public List<Voucher> findAllVoucherByName(String name) {
-        String[] nameSplit = name.split(" ");
-
-        Iterator<Voucher> vouchers = voucherRepository.findAll().iterator();
-        List<Voucher> result = new ArrayList<>();
-        while (vouchers.hasNext()) {
-            Voucher current = vouchers.next();
-            String currentName = current.getVoucherName();
-            boolean includeCurrent = true;
-            for (String subName : nameSplit) {
-                if (!currentName.contains(subName)) {
-                    includeCurrent = false;
-                    break;
-                }
-            }
-            if (includeCurrent) {
-                result.add(current);
-            }
-        }
-        return result;
+        return voucherRepository.findAllByVoucherNameContainingIgnoreCase(name);
     }
 
     @Override
     public List<Voucher> findAllVoucherByDiscount(Double discount) {
-        Iterator<Voucher> vouchers = voucherRepository.findAll().iterator();
-        List<Voucher> result = new ArrayList<>();
-
-        while (vouchers.hasNext()) {
-            Voucher current = vouchers.next();
-            if (current.getVoucherDiscount().equals(discount)) {
-                result.add(current);
-            }
-        }
-        return result;
+        return voucherRepository.findAllByVoucherDiscount(discount);
     }
 
     @Override
     public List<Voucher> findAllVoucherByUsageQuota(Integer quota) {
-        Iterator<Voucher> vouchers = voucherRepository.findAll().iterator();
-        List<Voucher> result = new ArrayList<>();
-
-        while (vouchers.hasNext()) {
-            Voucher current = vouchers.next();
-            if (current.getVoucherQuota().equals(quota)) {
-                result.add(current);
-            }
-        }
-        return result;
+        return voucherRepository.findAllByVoucherQuota(quota);
     }
 
 }

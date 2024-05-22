@@ -1,6 +1,5 @@
 package id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.service;
 
-import enums.NotificationStatus;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.Voucher;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.dto.DTOCustomer;
 
@@ -9,5 +8,5 @@ public interface NotificationService {
 
     public DTOCustomer rejectNotification(DTOCustomer customer);
 
-    public void notify(NotificationStatus status, Voucher voucher);
+    public void notify(String status, Voucher voucher);
 }
