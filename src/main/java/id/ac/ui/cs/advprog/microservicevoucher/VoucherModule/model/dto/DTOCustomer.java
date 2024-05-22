@@ -1,6 +1,5 @@
 package id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.dto;
 
-import enums.NotificationStatus;
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.Notification;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
@@ -8,6 +7,8 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.*;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CompletableFuture;
@@ -24,10 +25,8 @@ public class DTOCustomer {
     private String phoneNumber;
     private String email;
 
-    public CompletableFuture<Void> update(Notification payload) {
-        // TODO: implement send request
-        RestTemplate restTemplate = new RestTemplate();
-        String uri = "";
+    @Async
+    public CompletableFuture<Void> update(Notification payload, String uri, RestTemplate restTemplate) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -51,11 +50,10 @@ public class DTOCustomer {
             } else {
                 System.out.println("Nothing was sent");
             }
-        } catch (Exception e) {
-            // Handle exceptions
-            e.printStackTrace();
-        }
 
-        return CompletableFuture.completedFuture(null);
+            return CompletableFuture.completedFuture(null);
+        } catch (Exception e) {
+            throw new RestClientException("Failed to connect to the server");
+        }
     }
 }
