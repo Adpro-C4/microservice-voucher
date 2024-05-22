@@ -52,9 +52,7 @@ public class VoucherTest {
 
     @Test
     void testSetNameIfNameIsEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            voucher.setVoucherName("");
-        });
+        assertThrows(IllegalArgumentException.class, () -> voucher.setVoucherName(""));
     }
 
     @Test
@@ -71,16 +69,12 @@ public class VoucherTest {
 
     @Test
     void testSetDiscountIfDiscountAboveOneHundredPercent() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            voucher.setVoucherDiscount(1.01);
-        });
+        assertThrows(IllegalArgumentException.class, () -> voucher.setVoucherDiscount(1.01));
     }
 
     @Test
     void testSetDiscountIfDiscountBelowZeroPercent() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            voucher.setVoucherDiscount(-0.01);
-        });
+        assertThrows(IllegalArgumentException.class, () -> voucher.setVoucherDiscount(-0.01));
     }
 
     @Test
@@ -97,15 +91,11 @@ public class VoucherTest {
 
     @Test
     void testSetQuotaIfQuotaIsZero() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            voucher.setVoucherQuota(0);
-        });
+        assertThrows(IllegalArgumentException.class, () -> voucher.setVoucherQuota(0));
     }
 
     @Test
     void testSetQuotaIfQuotaBelowMinusOne() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            voucher.setVoucherQuota(-3);
-        });
+        assertThrows(IllegalArgumentException.class, () -> voucher.setVoucherQuota(-3));
     }
 }
