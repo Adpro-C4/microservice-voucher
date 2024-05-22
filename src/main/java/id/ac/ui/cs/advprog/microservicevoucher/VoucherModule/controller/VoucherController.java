@@ -18,6 +18,11 @@ public class VoucherController {
         return service.findAll();
     }
 
+    @GetMapping("/id")
+    public Voucher findById(@RequestParam Long id) {
+        return service.findVoucherById(id);
+    }
+
     @PostMapping("/create")
     public Voucher createVoucher(@RequestBody Voucher voucher) {
         return service.save(voucher);
