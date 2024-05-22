@@ -6,6 +6,8 @@ import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.dto.DTOCustom
 import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.repository.dto.DTOCustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -14,6 +16,9 @@ import java.util.concurrent.CompletableFuture;
 public class NotificationServiceImpl implements NotificationService{
     @Autowired
     DTOCustomerRepository customerRepository;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @Override
     public DTOCustomer acceptNotification(DTOCustomer customer) {
@@ -38,9 +43,12 @@ public class NotificationServiceImpl implements NotificationService{
 
         List<DTOCustomer> customers = customerRepository.findAll();
         for (DTOCustomer customer:customers) {
-            CompletableFuture<Void> future = customer.update(payload);
-            // Optionally, you can add a callback or combine with other futures
-            future.thenRun(() -> System.out.println("Update completed for customer"));
+            try {
+                String uri = String.format("http://placeholder-uri/@%s/notification-update", customer.getUsername());
+                CompletableFuture<Void> future = customer.update(payload, uri, restTemplate);
+                future.thenRun(() -> System.out.println("Update completed for customer"));
+            } catch (RestClientException ignored) {
+            }
         }
     }
 }
