@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.concurrent.CompletableFuture;
+
 @Getter
 @Setter
 @Entity
@@ -22,7 +24,7 @@ public class DTOCustomer {
     private String phoneNumber;
     private String email;
 
-    public void update(Notification payload) {
+    public CompletableFuture<Void> update(Notification payload) {
         // TODO: implement send request
         RestTemplate restTemplate = new RestTemplate();
         String uri = "";
@@ -53,5 +55,7 @@ public class DTOCustomer {
             // Handle exceptions
             e.printStackTrace();
         }
+
+        return CompletableFuture.completedFuture(null);
     }
 }
