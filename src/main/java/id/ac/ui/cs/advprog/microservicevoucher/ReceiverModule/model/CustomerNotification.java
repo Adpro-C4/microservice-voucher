@@ -20,9 +20,13 @@ public class CustomerNotification {
     @Column(name = "notifications", nullable = false)
     private List<String> notifications;
 
-    public CustomerNotification(String username) {
-        this.customerUsername = username;
+    public CustomerNotification() {
         this.notifications = new ArrayList<>();
+    }
+
+    public CustomerNotification(String username) {
+        this();
+        this.customerUsername = username;
     }
 
     public void addNotification(String newMsg) {

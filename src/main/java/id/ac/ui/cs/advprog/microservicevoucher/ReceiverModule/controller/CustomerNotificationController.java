@@ -19,11 +19,16 @@ public class CustomerNotificationController {
 
     @PostMapping("/update")
     public CustomerNotification updateVoucher(@RequestBody DTONotification notification, @RequestParam String username) {
+        System.out.println(username);
         CustomerNotification customerNotification = service.findAllByUsername(username);
+        System.out.println("dkdesu2");
         if (customerNotification == null) {
             customerNotification = new CustomerNotification(username);
+            System.out.println("dkdesu3");
         }
+        System.out.println("dkdesu4");
         customerNotification.addNotification(notification.getMessage());
+        System.out.println("dkdesu5");
         return service.save(customerNotification);
     }
 }

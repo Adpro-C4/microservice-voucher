@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DTONotificationTest {
     private DTONotification notification;
@@ -27,20 +28,8 @@ public class DTONotificationTest {
     }
 
     @Test
-    void testSetVoucherName() {
-        notification.setVoucherName("New Name");
-        assertEquals("New Name", notification.getVoucherName());
-    }
-
-    @Test
     void testGetVoucherDiscount() {
         assertEquals(0.5, notification.getVoucherDiscount());
-    }
-
-    @Test
-    void testSetVoucherDiscount() {
-        notification.setVoucherDiscount(0.4);
-        assertEquals(0.4, notification.getVoucherDiscount());
     }
 
     @Test
@@ -49,25 +38,22 @@ public class DTONotificationTest {
     }
 
     @Test
-    void testSetVoucherQuota() {
-        notification.setVoucherQuota(2);
-        assertEquals(2, notification.getVoucherQuota());
-    }
-
-    @Test
     void testGetStatus() {
         assertEquals(NotificationStatus.CREATED.getValue(), notification.getStatus());
     }
 
     @Test
-    void testSetStatus() {
-        notification.setStatus(NotificationStatus.UPDATED.getValue());
-        assertEquals(NotificationStatus.UPDATED.getValue(), notification.getStatus());
+    void testGetMessage() {
+        assertEquals("New voucher available:\nVoucher Name: Voucher Name\nValue: 50.00% off\nUsage Quota: 1", notification.getMessage());
     }
 
     @Test
-    void testGetMessage() {
-        notification.setMessage("New message");
-        assertEquals("New message", notification.getMessage());
+    void testSetStatusInvalid() {
+        assertThrows(IllegalArgumentException.class, () -> notification.setStatus("BOOYAH"));
+    }
+
+    @Test
+    void testSetMessageInvalid() {
+        assertThrows(IllegalArgumentException.class, () -> notification.setMessage("BOOYAH!! New Voucher"));
     }
 }
