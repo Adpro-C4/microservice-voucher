@@ -13,12 +13,13 @@ public class DTONotificationTest {
 
     @BeforeEach
     void setUp() {
-        notification = new DTONotification();
-        notification.setVoucherName("Voucher Name");
-        notification.setVoucherDiscount(0.5);
-        notification.setVoucherQuota(1);
-        notification.setStatus(NotificationStatus.CREATED.getValue());
-        notification.setMessage("New voucher available:\nVoucher Name: Voucher Name\nValue: 50.00% off\nUsage Quota: 1");
+        notification = new DTONotification(
+                "Voucher Name",
+                0.5,
+                1,
+                NotificationStatus.CREATED.getValue(),
+                "New voucher available:\nVoucher Name: Voucher Name\nValue: 50.00% off\nUsage Quota: 1"
+        );
     }
 
     @Test

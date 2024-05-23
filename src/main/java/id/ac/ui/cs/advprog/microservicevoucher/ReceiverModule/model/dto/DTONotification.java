@@ -15,6 +15,14 @@ public class DTONotification {
     String status;
     String message;
 
+    public DTONotification(String voucherName, Double voucherDiscount, Integer voucherQuota, String status, String message) {
+        this.voucherName = voucherName;
+        this.voucherDiscount = voucherDiscount;
+        this.voucherQuota = voucherQuota;
+        setStatus(status);
+        setMessage(message);
+    }
+
     public void setStatus(String status) {
         if (!NotificationStatus.contains(status)) {throw new IllegalArgumentException();}
         this.status = status;
