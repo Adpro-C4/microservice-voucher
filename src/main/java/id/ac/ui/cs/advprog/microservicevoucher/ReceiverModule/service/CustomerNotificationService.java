@@ -5,8 +5,6 @@ import id.ac.ui.cs.advprog.microservicevoucher.ReceiverModule.repository.Custome
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class CustomerNotificationService {
     @Autowired

@@ -1,8 +1,8 @@
 package id.ac.ui.cs.advprog.microservicevoucher.ReceiverModule.controller;
 
 import id.ac.ui.cs.advprog.microservicevoucher.ReceiverModule.model.CustomerNotification;
+import id.ac.ui.cs.advprog.microservicevoucher.ReceiverModule.model.dto.DTONotification;
 import id.ac.ui.cs.advprog.microservicevoucher.ReceiverModule.service.CustomerNotificationService;
-import id.ac.ui.cs.advprog.microservicevoucher.VoucherModule.model.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public class CustomerNotificationController {
     }
 
     @PostMapping("/update")
-    public CustomerNotification updateVoucher(@RequestBody Notification notification, @RequestParam String username) {
+    public CustomerNotification updateVoucher(@RequestBody DTONotification notification, @RequestParam String username) {
         CustomerNotification customerNotification = service.findAllByUsername(username);
         if (customerNotification == null) {
             customerNotification = new CustomerNotification(username);
