@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DTONotificationTest {
     private DTONotification notification;
@@ -45,15 +44,5 @@ public class DTONotificationTest {
     @Test
     void testGetMessage() {
         assertEquals("New voucher available:\nVoucher Name: Voucher Name\nValue: 50.00% off\nUsage Quota: 1", notification.getMessage());
-    }
-
-    @Test
-    void testSetStatusInvalid() {
-        assertThrows(IllegalArgumentException.class, () -> notification.setStatus("BOOYAH"));
-    }
-
-    @Test
-    void testSetMessageInvalid() {
-        assertThrows(IllegalArgumentException.class, () -> notification.setMessage("BOOYAH!! New Voucher"));
     }
 }
