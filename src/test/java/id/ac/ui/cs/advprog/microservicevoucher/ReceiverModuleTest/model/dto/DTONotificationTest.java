@@ -28,13 +28,26 @@ public class DTONotificationTest {
     }
 
     @Test
+    void testSetVoucherName() {
+        notification.setVoucherName("New Name");
+        assertEquals("New Name", notification.getVoucherName());
+    }
+
+    @Test
     void testGetVoucherDiscount() {
         assertEquals(0.5, notification.getVoucherDiscount());
     }
 
     @Test
+    void testSetVoucherDiscount() {
+        notification.setVoucherDiscount(1.0);
+        assertEquals(1.0, notification.getVoucherDiscount());
+    }
+
+    @Test
     void testGetVoucherQuota() {
-        assertEquals(1, notification.getVoucherQuota());
+        notification.setVoucherQuota(2);
+        assertEquals(2, notification.getVoucherQuota());
     }
 
     @Test
