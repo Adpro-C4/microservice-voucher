@@ -1,0 +1,58 @@
+package id.ac.ui.cs.advprog.microservicevoucher.ReceiverModuleTest.model.dto;
+
+import enums.NotificationStatus;
+import id.ac.ui.cs.advprog.microservicevoucher.ReceiverModule.model.dto.DTONotification;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class DTONotificationTest {
+    private DTONotification notification;
+
+    @BeforeEach
+    void setUp() {
+        notification = new DTONotification();
+        notification.setVoucherName("Voucher Name");
+        notification.setVoucherDiscount(0.5);
+        notification.setVoucherQuota(1);
+        notification.setStatus(NotificationStatus.CREATED.getValue());
+        notification.setMessage("New voucher available:\nVoucher Name: Voucher Name\nValue: 50.00% off\nUsage Quota: 1");
+    }
+
+    @Test
+    void testGetVoucherName() {
+        assertEquals("Voucher Name", notification.getVoucherName());
+    }
+
+    @Test
+    void testGetVoucherDiscount() {
+        assertEquals(0.5, notification.getVoucherDiscount());
+    }
+
+    @Test
+    void testGetVoucherQuota() {
+        assertEquals(1, notification.getVoucherQuota());
+    }
+
+    @Test
+    void testGetStatus() {
+        assertEquals(NotificationStatus.CREATED.getValue(), notification.getStatus());
+    }
+
+    @Test
+    void testGetMessage() {
+        assertEquals("New voucher available:\nVoucher Name: Voucher Name\nValue: 50.00% off\nUsage Quota: 1", notification.getMessage());
+    }
+
+    @Test
+    void testSetStatusInvalid() {
+        assertThrows(IllegalArgumentException.class, () -> notification.setStatus("BOOYAH"));
+    }
+
+    @Test
+    void testSetMessageInvalid() {
+        assertThrows(IllegalArgumentException.class, () -> notification.setMessage("BOOYAH!! New Voucher"));
+    }
+}
