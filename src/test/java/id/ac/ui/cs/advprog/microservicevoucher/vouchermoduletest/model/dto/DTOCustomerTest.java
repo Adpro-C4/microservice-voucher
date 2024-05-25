@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
-public class DTOCustomerTest {
+class DTOCustomerTest {
     @Mock
     private RestTemplate restTemplate;
 

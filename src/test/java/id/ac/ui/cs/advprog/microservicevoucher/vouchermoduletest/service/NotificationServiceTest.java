@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class NotificationServiceTest {
+class NotificationServiceTest {
     @Mock
     private DTOCustomerRepository customerRepository;
 

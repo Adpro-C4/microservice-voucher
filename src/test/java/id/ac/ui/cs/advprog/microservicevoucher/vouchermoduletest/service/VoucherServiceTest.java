@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class VoucherServiceTest {
+class VoucherServiceTest {
 
     @Mock
     private VoucherRepository voucherRepository;
