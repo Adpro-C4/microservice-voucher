@@ -21,9 +21,16 @@ public class VoucherServiceImpl implements VoucherService{
     }
 
     @Override
-    public Voucher save(Voucher voucher) {
+    public Voucher create(Voucher voucher) {
         voucherRepository.save(voucher);
         notificationService.notify(NotificationStatus.CREATED.getValue(), voucher);
+        return voucher;
+    }
+
+    @Override
+    public Voucher update(Voucher voucher) {
+        voucherRepository.save(voucher);
+        notificationService.notify(NotificationStatus.UPDATED.getValue(), voucher);
         return voucher;
     }
 

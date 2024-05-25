@@ -29,12 +29,12 @@ public class VoucherController {
 
     @PostMapping("/create")
     public Voucher createVoucher(@RequestBody Voucher voucher) {
-        return service.save(voucher);
+        return service.create(voucher);
     }
 
     @PostMapping("/update")
     public Voucher updateVoucher(@RequestBody Voucher voucher) {
-        return service.save(voucher);
+        return service.update(voucher);
     }
 
     @PostMapping("/delete")

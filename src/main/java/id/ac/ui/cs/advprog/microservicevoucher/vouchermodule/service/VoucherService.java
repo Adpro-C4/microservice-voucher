@@ -5,7 +5,8 @@ import id.ac.ui.cs.advprog.microservicevoucher.vouchermodule.model.Voucher;
 import java.util.List;
 
 public interface VoucherService {
-    public Voucher save(Voucher voucher);
+    public Voucher create(Voucher voucher);
+    public Voucher update(Voucher voucher);
     public void deleteById(Long id);
     public List<Voucher> findAll();
     public Voucher findVoucherById(Long id);
