@@ -13,21 +13,8 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_21
 }
 
-configurations {
-	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
-	}
-}
-
 repositories {
 	mavenCentral()
-}
-sonarqube {
-	properties {
-		property("sonar.projectKey", "Adpro-C4_microservice-voucher")
-		property("sonar.organization", "adpro-c4")
-		property("sonar.host.url", "https://sonarcloud.io")
-	}
 }
 
 dependencies {
@@ -53,24 +40,35 @@ tasks.withType<Test> {
 }
 
 tasks.test {
-	filter {
-		excludeTestsMatching("*FunctionalTest")
-	}
-	finalizedBy(tasks.jacocoTestReport)
+	finalizedBy(tasks.jacocoTestReport) // Ensure jacocoTestReport runs after tests
 }
 
 tasks.jacocoTestReport {
-	classDirectories.setFrom(files(classDirectories.files.map {
-		fileTree(it) { exclude("**/*Application**") }
-	}))
-	dependsOn(tasks.test) // tests are required to run before generating the report
+	dependsOn(tasks.test) // Ensure tests run before generating the report
 	reports {
 		xml.required.set(true)
-		csv.required.set(true)
+		csv.required.set(false)
+		html.required.set(true)
 		html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+	}
+	classDirectories.setFrom(files(classDirectories.files.map {
+		fileTree(it) {
+			exclude("**/*Application**")
+		}
+	}))
+}
+
+sonarqube {
+	properties {
+		property("sonar.projectKey", "Adpro-C4_microservice-voucher")
+		property("sonar.organization", "adpro-c4")
+		property("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.login", "c4361da685d2897fa44e2fa4e3400d3fdb281a63")
+		property("sonar.junit.reportPaths", "build/test-results/test")
+		property("sonar.jacoco.reportPaths", "build/jacoco/test.exec")
 	}
 }
 
-tasks.named("sonarqube") {
+tasks.named("sonar") {
 	dependsOn("test")
 }

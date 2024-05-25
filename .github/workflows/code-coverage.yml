@@ -26,13 +26,14 @@ jobs:
         run: |
           ./gradlew build test jacocoTestReport
 
-      - name: Build and SonarCloud Scan
+      - name: SonarCloud Scan
         run: |
-          ./gradlew test jacocoTestReport sonarqube \
-            -Dsonar.projectKey=Adpro-C4_microservice-voucher \
-            -Dsonar.organization=adpro-c4 \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=c4361da685d2897fa44e2fa4e3400d3fdb281a63
+          ./gradlew sonar \
+          -Dsonar.projectKey=Adpro-C4_microservice-voucher \
+          -Dsonar.organization=adpro-c4 \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=c4361da685d2897fa44e2fa4e3400d3fdb281a63
+
       - name: Display SonarCloud Issues URL
         run: |
           echo "SonarCloud Issues URL: https://sonarcloud.io/project/issues?id=Adpro-C4_microservice-voucher"
