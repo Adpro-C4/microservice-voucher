@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Getter
@@ -44,10 +45,10 @@ public class DTOCustomer {
 
             HttpStatusCode statusCode = responseEntity.getStatusCode();
             int statusCodeValue = statusCode.value();
-            logger.info("Status Code: " + statusCodeValue);
 
+            logger.log(Level.INFO, "Status Code: {0}", statusCodeValue);
             if (statusCodeValue == HttpStatus.OK.value()) {
-                logger.info("Sent:\n" + responseEntity.getBody());
+                logger.log(Level.INFO, "Sent:\n{0}", responseEntity.getBody());
             } else {
                 logger.info("Nothing was sent");
             }
