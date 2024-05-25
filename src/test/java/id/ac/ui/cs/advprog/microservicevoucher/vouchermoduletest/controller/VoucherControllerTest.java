@@ -79,7 +79,7 @@ class VoucherControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String voucherJson = objectMapper.writeValueAsString(voucher);
 
-        when(service.save(any(Voucher.class))).thenReturn(voucher);
+        when(service.create(any(Voucher.class))).thenReturn(voucher);
 
         mockMvc.perform(post("/voucher/create")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -91,7 +91,7 @@ class VoucherControllerTest {
                 .andExpect(jsonPath("$.voucherDiscount").value(0.5))
                 .andExpect(jsonPath("$.voucherQuota").value(1));
 
-        verify(service, times(1)).save(any(Voucher.class));
+        verify(service, times(1)).create(any(Voucher.class));
     }
 
     @Test
@@ -99,7 +99,7 @@ class VoucherControllerTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String voucherJson = objectMapper.writeValueAsString(voucher);
 
-        when(service.save(any(Voucher.class))).thenReturn(voucher);
+        when(service.update(any(Voucher.class))).thenReturn(voucher);
 
         mockMvc.perform(post("/voucher/update")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -111,7 +111,7 @@ class VoucherControllerTest {
                 .andExpect(jsonPath("$.voucherDiscount").value(0.5))
                 .andExpect(jsonPath("$.voucherQuota").value(1));
 
-        verify(service, times(1)).save(any(Voucher.class));
+        verify(service, times(1)).update(any(Voucher.class));
     }
 
     @Test

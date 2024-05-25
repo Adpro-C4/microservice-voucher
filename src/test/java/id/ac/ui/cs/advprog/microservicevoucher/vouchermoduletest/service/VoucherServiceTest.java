@@ -44,13 +44,23 @@ class VoucherServiceTest {
     }
 
     @Test
-    void testSaveVoucher() {
+    void testCreateVoucher() {
         when(voucherRepository.save(voucher)).thenReturn(voucher);
 
-        Voucher savedVoucher = voucherService.save(voucher);
+        Voucher savedVoucher = voucherService.create(voucher);
 
         assertEquals(voucher, savedVoucher);
         verify(notificationService, times(1)).notify(NotificationStatus.CREATED.getValue(), voucher);
+    }
+
+    @Test
+    void testUpdateVoucher() {
+        when(voucherRepository.save(voucher)).thenReturn(voucher);
+
+        Voucher savedVoucher = voucherService.update(voucher);
+
+        assertEquals(voucher, savedVoucher);
+        verify(notificationService, times(1)).notify(NotificationStatus.UPDATED.getValue(), voucher);
     }
 
     @Test
