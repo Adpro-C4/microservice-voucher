@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NotificationStatusTest {
+class NotificationStatusTest {
     @Test
     void testGetValue() {
         assertEquals("CREATED", NotificationStatus.CREATED.getValue());

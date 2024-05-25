@@ -3,6 +3,7 @@ plugins {
 	jacoco
 	id("org.springframework.boot") version "3.2.4"
 	id("io.spring.dependency-management") version "1.1.4"
+	id("org.sonarqube") version "5.0.0.4638"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -21,17 +22,30 @@ configurations {
 repositories {
 	mavenCentral()
 }
+sonarqube {
+	properties {
+		property("sonar.projectKey", "Adpro-C4_microservice-voucher")
+		property("sonar.organization", "adpro-c4")
+		property("sonar.host.url", "https://sonarcloud.io")
+	}
+}
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("io.micrometer:micrometer-registry-prometheus")
+	implementation("org.postgresql:postgresql")
+
 	compileOnly("org.projectlombok:lombok")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	annotationProcessor("org.projectlombok:lombok")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.postgresql:postgresql")
 }
 
 tasks.withType<Test> {
@@ -40,7 +54,7 @@ tasks.withType<Test> {
 
 tasks.test {
 	filter {
-		excludeTestsMatching("*FunctionalTest");
+		excludeTestsMatching("*FunctionalTest")
 	}
 	finalizedBy(tasks.jacocoTestReport)
 }
@@ -51,8 +65,12 @@ tasks.jacocoTestReport {
 	}))
 	dependsOn(tasks.test) // tests are required to run before generating the report
 	reports {
-		xml.required.set(false)
-		csv.required.set(false)
+		xml.required.set(true)
+		csv.required.set(true)
 		html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
 	}
+}
+
+tasks.named("sonarqube") {
+	dependsOn("test")
 }
