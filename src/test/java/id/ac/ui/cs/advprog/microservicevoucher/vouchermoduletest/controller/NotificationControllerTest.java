@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import id.ac.ui.cs.advprog.microservicevoucher.vouchermodule.controller.NotificationController;
 import id.ac.ui.cs.advprog.microservicevoucher.vouchermodule.model.dto.DTOCustomer;
 import id.ac.ui.cs.advprog.microservicevoucher.vouchermodule.service.NotificationService;
+import id.ac.ui.cs.advprog.microservicevoucher.vouchermodule.service.NotificationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Logger;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -35,6 +37,8 @@ class NotificationControllerTest {
     private RestTemplate restTemplate;
 
     private DTOCustomer customer;
+
+    private static final Logger logger = Logger.getLogger(NotificationServiceImpl.class.getName());
 
     @BeforeEach
     void setUp() {
@@ -88,7 +92,7 @@ class NotificationControllerTest {
         ResponseEntity<Void> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(restTemplate.exchange(anyString(), any(), any(), eq(Void.class))).thenReturn(responseEntity);
 
-        CompletableFuture<Void> future = customer.update(null, String.format("http://34.143.184.254/customer-notification/update?username=%s", customer.getUsername()), restTemplate);
+        CompletableFuture<Void> future = customer.update(null, String.format("http://34.143.184.254/customer-notification/update?username=%s", customer.getUsername()), restTemplate, logger);
         future.get();
         verify(restTemplate, times(1)).exchange(anyString(), any(), any(), eq(Void.class));
     }
@@ -98,7 +102,7 @@ class NotificationControllerTest {
         when(restTemplate.exchange(anyString(), any(), any(), eq(Void.class))).thenThrow(new RestClientException("Failed"));
 
         try {
-            CompletableFuture<Void> future = customer.update(null, String.format("http://34.143.184.254/customer-notification/update?username=%s", customer.getUsername()), restTemplate);
+            CompletableFuture<Void> future = customer.update(null, String.format("http://34.143.184.254/customer-notification/update?username=%s", customer.getUsername()), restTemplate, logger);
             future.get();
         } catch (Exception ignored) {
         }

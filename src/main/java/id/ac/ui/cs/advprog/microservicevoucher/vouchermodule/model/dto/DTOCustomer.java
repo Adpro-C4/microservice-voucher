@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Logger;
 
 @Getter
 @Setter
@@ -26,7 +27,7 @@ public class DTOCustomer {
     private String email;
 
     @Async
-    public CompletableFuture<Void> update(Notification payload, String uri, RestTemplate restTemplate) {
+    public CompletableFuture<Void> update(Notification payload, String uri, RestTemplate restTemplate, Logger logger) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -43,12 +44,12 @@ public class DTOCustomer {
 
             HttpStatusCode statusCode = responseEntity.getStatusCode();
             int statusCodeValue = statusCode.value();
-            System.out.println("Status Code: " + statusCodeValue);
+            logger.info("Status Code: " + statusCodeValue);
 
             if (statusCodeValue == HttpStatus.OK.value()) {
-                System.out.println("Sent:\n" + responseEntity.getBody());
+                logger.info("Sent:\n" + responseEntity.getBody());
             } else {
-                System.out.println("Nothing was sent");
+                logger.info("Nothing was sent");
             }
 
             return CompletableFuture.completedFuture(null);

@@ -53,7 +53,7 @@ public class NotificationServiceImpl implements NotificationService{
         for (DTOCustomer customer:customers) {
             try {
                 String uri = notificationUpdateUri+customer.getUsername();
-                CompletableFuture<Void> future = customer.update(payload, uri, restTemplate);
+                CompletableFuture<Void> future = customer.update(payload, uri, restTemplate, logger);
                 future.thenRun(() -> logger.info(String.format("Update completed for customer %s%n", customer.getUsername())));
             } catch (RestClientException ignored) {
             }

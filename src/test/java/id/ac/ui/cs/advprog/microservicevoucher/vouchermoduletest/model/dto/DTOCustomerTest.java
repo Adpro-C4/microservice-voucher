@@ -3,6 +3,7 @@ package id.ac.ui.cs.advprog.microservicevoucher.vouchermoduletest.model.dto;
 import enums.NotificationStatus;
 import id.ac.ui.cs.advprog.microservicevoucher.vouchermodule.model.Notification;
 import id.ac.ui.cs.advprog.microservicevoucher.vouchermodule.model.dto.DTOCustomer;
+import id.ac.ui.cs.advprog.microservicevoucher.vouchermodule.service.NotificationServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -27,6 +29,7 @@ class DTOCustomerTest {
     private Notification notification;
 
     private static final String FAKE_URI = "http://fake-url.com/api/update";
+    private static final Logger logger = Logger.getLogger(NotificationServiceImpl.class.getName());
 
     @BeforeEach
     void setUp() {
@@ -71,7 +74,7 @@ class DTOCustomerTest {
         ResponseEntity<Void> responseEntity = new ResponseEntity<>(HttpStatus.OK);
         when(restTemplate.exchange(FAKE_URI, HttpMethod.POST, requestEntity, Void.class)).thenReturn(responseEntity);
 
-        CompletableFuture<Void> future = customer.update(notification, FAKE_URI, restTemplate);
+        CompletableFuture<Void> future = customer.update(notification, FAKE_URI, restTemplate, logger);
 
         try {
             future.get();
@@ -92,7 +95,7 @@ class DTOCustomerTest {
         ResponseEntity<Void> responseEntity = new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         when(restTemplate.exchange(FAKE_URI, HttpMethod.POST, requestEntity, Void.class)).thenReturn(responseEntity);
 
-        CompletableFuture<Void> future = customer.update(notification, FAKE_URI, restTemplate);
+        CompletableFuture<Void> future = customer.update(notification, FAKE_URI, restTemplate, logger);
 
         try {
             future.get();
@@ -110,7 +113,7 @@ class DTOCustomerTest {
                 .thenThrow(new RestClientException("Failed to connect to the server"));
 
         assertThrows(RestClientException.class, () -> {
-            CompletableFuture<Void> future = customer.update(notification, FAKE_URI, restTemplate);
+            CompletableFuture<Void> future = customer.update(notification, FAKE_URI, restTemplate, logger);
             try {
                 future.get();
             } catch (InterruptedException | ExecutionException e) {
