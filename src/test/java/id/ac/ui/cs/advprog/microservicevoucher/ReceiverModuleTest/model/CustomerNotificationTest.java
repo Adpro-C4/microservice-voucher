@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CustomerNotificationTest {
+class CustomerNotificationTest {
     private CustomerNotification customerNotification;
 
     @BeforeEach
