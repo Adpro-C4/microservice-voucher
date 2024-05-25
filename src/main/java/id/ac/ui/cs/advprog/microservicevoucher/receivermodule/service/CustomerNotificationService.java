@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerNotificationService {
+    private final CustomerNotificationRepository repository;
+
     @Autowired
-    CustomerNotificationRepository repository;
+    public CustomerNotificationService(CustomerNotificationRepository repository) {
+        this.repository = repository;
+    }
 
     public CustomerNotification save(CustomerNotification customerNotification) {
         repository.save(customerNotification);

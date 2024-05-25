@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("customer-notification")
 public class CustomerNotificationController {
+    private final CustomerNotificationService service;
+
     @Autowired
-    CustomerNotificationService service;
+    public CustomerNotificationController(CustomerNotificationService service) {
+        this.service = service;
+    }
 
     @GetMapping("/list")
     public CustomerNotification listByUsername(@RequestParam String username) {
