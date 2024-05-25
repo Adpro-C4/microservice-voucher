@@ -35,4 +35,4 @@ jobs:
             -Dsonar.login=c4361da685d2897fa44e2fa4e3400d3fdb281a63
       - name: Display SonarCloud Issues URL
         run: |
-          echo "SonarCloud Issues URL: https://sonarcloud.io/project/issues?id=Adpro-C4_microservice-pembelian"
+          echo "SonarCloud Issues URL: https://sonarcloud.io/project/issues?id=Adpro-C4_microservice-voucher"
