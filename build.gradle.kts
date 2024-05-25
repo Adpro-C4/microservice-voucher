@@ -63,7 +63,6 @@ sonarqube {
 		property("sonar.projectKey", "Adpro-C4_microservice-voucher")
 		property("sonar.organization", "adpro-c4")
 		property("sonar.host.url", "https://sonarcloud.io")
-		property("sonar.login", "c4361da685d2897fa44e2fa4e3400d3fdb281a63")
 		property("sonar.junit.reportPaths", "build/test-results/test")
 		property("sonar.jacoco.reportPaths", "build/jacoco/test.exec")
 	}

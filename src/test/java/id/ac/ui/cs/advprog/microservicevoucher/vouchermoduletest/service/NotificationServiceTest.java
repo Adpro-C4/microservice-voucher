@@ -57,7 +57,7 @@ class NotificationServiceTest {
     }
 
     @Test
-    void testNotify() {
+    void testNotifyIfNoListener() {
         Voucher voucher = new Voucher(
                 "Voucher Name",
                 "Voucher description",
