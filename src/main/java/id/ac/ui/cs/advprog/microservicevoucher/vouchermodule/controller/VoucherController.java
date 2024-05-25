@@ -10,8 +10,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/voucher")
 public class VoucherController {
+    private final VoucherService service;
+
     @Autowired
-    private VoucherService service;
+    public VoucherController(VoucherService service) {
+        this.service = service;
+    }
 
     @GetMapping("/list")
     public List<Voucher> findAll() {

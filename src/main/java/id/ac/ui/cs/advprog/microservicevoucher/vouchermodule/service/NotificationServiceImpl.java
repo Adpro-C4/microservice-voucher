@@ -16,16 +16,17 @@ import java.util.logging.Logger;
 
 @Service
 public class NotificationServiceImpl implements NotificationService{
-    @Autowired
-    DTOCustomerRepository customerRepository;
-
-    @Autowired
-    RestTemplate restTemplate;
-
-    @Value("${notification.update.uri}")
-    private String notificationUpdateUri;
-
+    private final DTOCustomerRepository customerRepository;
+    private final RestTemplate restTemplate;
+    private final String notificationUpdateUri;
     private static final Logger logger = Logger.getLogger(NotificationServiceImpl.class.getName());
+
+    @Autowired
+    public NotificationServiceImpl(DTOCustomerRepository customerRepository, RestTemplate restTemplate, @Value("${notification.update.uri}") String notificationUpdateUri) {
+        this.customerRepository = customerRepository;
+        this.restTemplate = restTemplate;
+        this.notificationUpdateUri = notificationUpdateUri;
+    }
 
     @Override
     public DTOCustomer acceptNotification(DTOCustomer customer) {

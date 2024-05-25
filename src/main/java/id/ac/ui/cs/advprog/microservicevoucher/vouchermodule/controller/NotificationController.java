@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/notification")
 public class NotificationController {
+    private final NotificationService service;
+
     @Autowired
-    private NotificationService service;
+    public NotificationController(NotificationService service) {
+        this.service = service;
+    }
 
     @PostMapping("/accept-notification")
     public DTOCustomer acceptNotification(@RequestBody DTOCustomer customer) {

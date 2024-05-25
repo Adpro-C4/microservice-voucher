@@ -11,10 +11,14 @@ import java.util.List;
 
 @Service
 public class VoucherServiceImpl implements VoucherService{
+    private final VoucherRepository voucherRepository;
+    private final NotificationService notificationService;
+
     @Autowired
-    VoucherRepository voucherRepository;
-    @Autowired
-    NotificationService notificationService;
+    public VoucherServiceImpl(VoucherRepository voucherRepository, NotificationService notificationService) {
+        this.voucherRepository = voucherRepository;
+        this.notificationService = notificationService;
+    }
 
     @Override
     public Voucher save(Voucher voucher) {
